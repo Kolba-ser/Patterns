@@ -1,24 +1,21 @@
-﻿
+﻿using UnityEngine;
 
-using UnityEngine;
-
-namespace Patterns.FactoryMethod
+namespace Patterns.FactoryMethod.Scripts
 {
-    public sealed class MetalStack : Stack
+    public sealed class WoodenStack : Stack
     {
-        [SerializeField] private MetalCreator creator;
+        [SerializeField] private WoodCreator creator;
 
         protected override void Create()
         {
-            float currentHeight = 0;
             for (int i = 0; i < Tiers; i++)
             {
                 if (creator.TryCreate(out Product product))
                 {
-                    currentHeight += product.GetSize().y;
                     product.transform.position = new Vector3(transform.position.x,
-                                                    transform.position.y + currentHeight,
+                                                    transform.position.y + height + product.GetSize().y / 2,
                                                     transform.position.z);
+                    height += product.GetSize().y;
                     product.transform.SetParent(transform);
                 }
                 else

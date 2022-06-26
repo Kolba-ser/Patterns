@@ -11,16 +11,14 @@ namespace Patterns.FactoryMethod
         protected override void Create()
         {
             int length = creators.Count;
-            float currentHeight = 0;
             for (int i = 0; i < Tiers; i++)
             {
                 if(creators[Random.Range(0, length)].TryCreate(out Product product))
                 {
-                    Debug.Log(Random.Range(0, length));
-                    currentHeight += product.GetSize().y;
                     product.transform.position = new Vector3(transform.position.x,
-                                                    transform.position.y + currentHeight,
+                                                    transform.position.y + height + product.GetSize().y / 2,
                                                     transform.position.z);
+                    height += product.GetSize().y;
                     product.transform.SetParent(transform);
                 }
                 else

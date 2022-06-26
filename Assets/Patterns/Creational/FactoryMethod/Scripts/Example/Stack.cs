@@ -6,6 +6,9 @@ namespace Patterns.FactoryMethod
     {
         [SerializeField, Min(0)] private int tiers;
 
+        protected float height;
+
+        public float Height => height;
         public int Tiers => tiers;
 
         protected abstract void Create();
