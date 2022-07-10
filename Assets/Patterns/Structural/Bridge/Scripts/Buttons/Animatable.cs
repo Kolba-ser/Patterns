@@ -1,15 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Patterns.Bridge
 {
+    [RequireComponent(typeof(Image))]
     public class Animatable : MonoBehaviour
     {
-        protected AnimationBase animation;
+        public AnimationBase Animation { get; set; }
 
-        public void SetAnimation(AnimationBase animation)
+        protected Image image;
+
+        protected virtual void Awake()
         {
-            this.animation = animation;
-            animation.Animate();
+            image = GetComponent<Image>();
+        }
+
+        public virtual void Animate()
+        {
+            Animation.Animate(image);
         }
     }
 }

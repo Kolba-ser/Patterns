@@ -1,13 +1,12 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Patterns.Bridge
 {
     public sealed class Bouncing : AnimationBase
     {
-        private readonly Transform transform;
         private readonly Sequence sequence;
-        private readonly float duration;
         private readonly Vector3[] scales = new Vector3[3]
         {
             new Vector3(0, 0, 0),
@@ -17,20 +16,18 @@ namespace Patterns.Bridge
 
 
 
-        public Bouncing(Transform transform, float duration)
+        public Bouncing(float duration) : base(duration)
         {
-            this.transform = transform;
-            this.duration = duration;
             sequence = DOTween.Sequence();
         }
 
-        public override void Animate()
+        public override void Animate(Image image)
         {
             if (scales.Length == 0)
                 return;
             float oneAnimationTime = duration / scales.Length;
 
-            RectTransform rectTransform = transform as RectTransform;
+            RectTransform rectTransform = image.rectTransform;
 
             sequence.Pause();
             for (int i = 0; i < scales.Length; i++)

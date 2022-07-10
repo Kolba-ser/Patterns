@@ -4,6 +4,13 @@ namespace Patterns.Bridge
 {
     public abstract class AnimationBase
     {
-        public abstract void Animate();
+        protected readonly float duration;
+
+        protected AnimationBase(float duration)
+        {
+            this.duration = duration;
+        }
+
+        public abstract void Animate(Image image);
     }
 }

@@ -12,11 +12,8 @@ namespace Patterns.Bridge
 
         private void Start()
         {
-            AnimationBase fade = new Fade(fadeImage, 1);
-            AnimationBase bouncing = new Bouncing(bouncingImage.transform, 1);
-
-            fadeImage.gameObject.AddComponent<Animatable>().SetAnimation(fade);
-            bouncingImage.gameObject.AddComponent<Animatable>().SetAnimation(bouncing);
+            fadeImage.gameObject.AddComponent<Animatable>().Animation = new Fade(1);
+            bouncingImage.gameObject.AddComponent<Animatable>().Animation = new Bouncing(1);
             
         }
     }
