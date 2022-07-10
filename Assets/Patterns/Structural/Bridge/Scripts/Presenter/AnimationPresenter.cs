@@ -12,9 +12,14 @@ namespace Patterns.Bridge
 
         private void Start()
         {
-            fadeImage.gameObject.AddComponent<Animatable>().Animation = new Fade(1);
-            bouncingImage.gameObject.AddComponent<Animatable>().Animation = new Bouncing(1);
-            
+            var anim1 =fadeImage.gameObject.AddComponent<Animatable>();
+            var anim2 = bouncingImage.gameObject.AddComponent<Animatable>();
+
+            anim1.Animation = new Fade(1);
+            anim2.Animation = new Bouncing(1);
+
+            anim1.Animate();
+            anim2.Animate();
         }
     }
 }
