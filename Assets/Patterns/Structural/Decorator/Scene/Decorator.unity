@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1272c8fdd3f599943b908f55706cd228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Race>k__BackingField: 2
+  <Race>k__BackingField: 0
   <Specialization>k__BackingField: 3
 --- !u!23 &2024918257
 MeshRenderer:
