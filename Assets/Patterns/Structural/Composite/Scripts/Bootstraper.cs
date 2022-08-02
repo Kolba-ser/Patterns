@@ -9,8 +9,31 @@ namespace Patterns.Composite
         [Space(20)]
         [SerializeField] private int amount;
         [SerializeField] private float duration;
+        [SerializeField] private EntityType type;
+        private enum EntityType
+        {
+            Squad,
+            Single
+        }
 
         private void Awake()
+        {
+
+            IMovableEntity entity = null;
+            switch (type)
+            {
+                case EntityType.Squad:
+                    entity = CreateSquad();
+                    break;
+                case EntityType.Single:
+                    entity = CreateUnit();
+                    break;
+            }
+
+            new EntityMover(cameraRaycaster, entity, duration);
+        }
+
+        private Squad CreateSquad()
         {
             List<IMovableEntity> units = new List<IMovableEntity>(amount);
             for (int i = 0; i < amount; i++)
@@ -21,9 +44,14 @@ namespace Patterns.Composite
 
                 units.Add(unit);
             }
-
-            Squad squad = new Squad(units);
-            new SquadMover(cameraRaycaster, squad, duration);
+            return new Squad(units);
+        }
+        private Unit CreateUnit()
+        {
+            var created = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            var unit = created.AddComponent<Unit>();
+            created.transform.position = Vector3.zero;
+            return unit;
         }
     }
 }
